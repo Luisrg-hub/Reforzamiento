@@ -1,0 +1,164 @@
+main > .container, main > .container-fluid
+{
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    background-color: #f5f5f5;
+    font-size: .9em;
+    height: 60px;
+}
+
+.footer > .container, .footer > .container-fluid {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    content: '';
+    left: 3px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: solid 5px transparent;
+    margin: 4px 4px 2px 4px;
+    background: transparent;
+}
+
+a.asc:after {
+    border-bottom: solid 7px #212529;
+    border-top-width: 0;
+}
+
+a.desc:after {
+    border-top: solid 7px #212529;
+    border-bottom-width: 0;
+}
+
+.grid-view th,
+.grid-view td:last-child {
+    white-space: nowrap;
+}
+
+.grid-view .filters input,
+.grid-view .filters select {
+    min-width: 50px;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+/* align the logout "link" (button in form) of the navbar */
+.navbar form > button.logout {
+    padding-top: 7px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+@media(max-width:767px) {
+    .navbar form > button.logout {
+        display:block;
+        text-align: left;
+        width: 100%;
+        padding: 10px 0;
+    }
+}
+
+.navbar form > button.logout:focus,
+.navbar form > button.logout:hover {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar form > button.logout:focus {
+    outline: none;
+}
+
+/* style breadcrumb widget as in previous bootstrap versions */
+.breadcrumb {
+    background-color: var(--bs-gray-200);
+    border-radius: .25rem;
+    padding: .75rem 1rem;
+}
+
+.breadcrumb-item > a
+{
+    text-decoration: none;
+}
+/* 1. Fuente Global (Ejemplo con Montserrat, una fuente muy limpia) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f9fa; /* Un gris muy tenue de fondo */
+}
+
+/* 2. Color Azul Institucional (Ajusta el Hexadecimal al de tu escuela) */
+:root {
+    --azul-tec: #1a3a8f; /* Azul oscuro típico de instituciones */
+    --azul-claro: #1e4db7;
+}
+
+/* 3. Personalizar el Navbar */
+.navbar {
+    background-color: var(--azul-tec) !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+}
+/* Aplicar estilo base a TODOS los botones del sistema */
+.btn {
+    font-family: 'Montserrat', sans-serif; /* La fuente que elegimos */
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    padding: 8px 16px;
+    border-radius: 4px; /* Bordes menos redondeados para un look más serio */
+    transition: all 0.3s ease;
+    border-width: 2px;
+}
+/* 4. Personalizar todos los botones primarios del sitio */
+/* Botones de "Crear" y "Guardar" (Originalmente verdes) */
+.btn-success {
+    background-color: var(--azul-claro) !important; 
+    border-color: var(--azul-claro) !important;
+    color: white !important;
+}
+
+/* Botones de "Actualizar" y "Ver" (Originalmente azules claros) */
+.btn-primary {
+    background-color: var(--azul-claro) !important;
+    border-color: var(--azul-claro) !important;
+    color: white !important;
+}
+
+/* Efecto Hover para ambos */
+.btn-success:hover, .btn-primary:hover {
+    background-color: #002244 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+.btn-primary:hover {
+    background-color: var(--azul-claro);
+    transform: translateY(-2px); /* Efecto de levante al pasar el mouse */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
