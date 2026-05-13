@@ -150,13 +150,23 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 /* Cabeceras de tabla en azul con texto blanco */
-.grid-view thead {
-    background-color: #003366;
-    color: white;
+.table thead th, 
+.grid-view table thead th {
+    background-color: var(--azul-tec) !important;
+    color: white !important;
+    border-bottom: 2px solid #002244 !important;
 }
 
-.grid-view thead a {
-    color: white !important; /* Para que los links de ordenamiento se vean */
+.table thead th a, 
+.grid-view table thead th a {
+    color: white !important; 
+    text-decoration: none;
+}
+
+/* Efecto para que los enlaces de ordenamiento se noten al pasar el mouse */
+.table thead th a:hover, 
+.grid-view table thead th a:hover {
+    color: #cccccc !important;
 }
 
 /* Bordes más finos para las tablas */
