@@ -91,7 +91,7 @@ class PerfilAlumnoController extends Controller
                     // 3. Guardamos el perfil
                     if ($model->save()) {
                         $transaction->commit(); // Si ambos se guardan, confirmamos la transacción
-                        return $this->redirect(['view', 'id' => $model->id]);
+                        return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
                     }
                 }
                 // Si algo falla, deshacemos todo
