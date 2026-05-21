@@ -14,9 +14,9 @@ use yii\widgets\ActiveForm;
     <div class="card mb-3">
         <div class="card-header bg-dark text-white">Datos de cuenta de usuario</div>
         <div class="card-body">
-            <?= $form->field($user, 'username')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($user, 'email')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($user, 'password')->passwordInput(['maxlength' => true]) ?>
+            <?= $form->field($user, 'username')->textInput(['maxlength' => true])->label('Nombre de usuario') ?>
+            <?= $form->field($user, 'email')->textInput(['maxlength' => true])->label('Correo electrónico') ?>
+            <?= $form->field($user, 'password')->passwordInput(['maxlength' => true])->label('Contraseña') ?>
         </div>
     </div>
 
@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
             <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'apellido_paterno')->textInput(['maxlength' => true]) ?>
             <?= $form->field($model, 'apellido_materno')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'telefono')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'telefono')->textInput(['maxlength' => true])->label('Teléfono') ?>
         </div>
     </div>
 

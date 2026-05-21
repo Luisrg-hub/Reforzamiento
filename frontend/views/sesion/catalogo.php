@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
                 } else {
                     // Botón normal azul para inscribirse
-                    return Html::a('Inscribirse', ['inscribirse', 'id' => $model->id], [
+                    return Html::a('Inscribirse', ['inscribir', 'id_sesion' => $model->id], [
                         'class' => 'btn btn-primary'
                     ]);
                 }

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\Asignatura $model */
 
-$this->title = $model->id;
+$this->title = 'Datos de la asignatura';
 $this->params['breadcrumbs'][] = ['label' => 'Asignaturas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Eliminar', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -31,7 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
     'attributes' => [
         'id',
         'nombre',
-        
+        [
+            'label' => 'Carrera',
+            'value' => $model->carrera ? $model->carrera->nombre : '(No asignada)',
+        ],
         // --- CAMBIO EN EL ATRIBUTO ESTADO ---
         [
             'attribute' => 'estado',

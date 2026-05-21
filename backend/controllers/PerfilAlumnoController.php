@@ -117,14 +117,30 @@ class PerfilAlumnoController extends Controller
      */
     public function actionUpdate($id_usuario)
     {
+        // Esto ya lo tienes (Busca el perfil del alumno)
         $model = $this->findModel($id_usuario);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
+        // Buscamos la cuenta de usuario vinculada en la base de datos
+        // Usamos la ruta completa del modelo User de la plantilla advanced
+        $modelUser = \common\models\User::findOne($id_usuario); 
+
+        // el if hace que cargue y guarde ambos formularios
+        if ($this->request->isPost) {
+            $perfilCargado = $model->load($this->request->post());
+            $usuarioCargado = $modelUser->load($this->request->post());
+            
+            // Si ambos recibieron datos y ambos se guardan sin errores en la BD...
+            if ($perfilCargado && $usuarioCargado) {
+                if ($model->save() && $modelUser->save()) {
+                    return $this->redirect(['view', 'id_usuario' => $model->id_usuario]);
+                }
+            }
         }
 
+        // Esto ahora sí funcionará porque $modelUser ya existe y tiene datos
         return $this->render('update', [
             'model' => $model,
+            'modelUser' => $modelUser,
         ]);
     }
 

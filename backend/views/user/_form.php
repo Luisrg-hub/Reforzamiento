@@ -15,9 +15,9 @@ use yii\widgets\ActiveForm;
     <div class="card">
         <div class="card-header">Datos de Cuenta de usuario</div>
         <div class="card-body">
-            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true])->label('Nombre de usuario') ?>
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true])->label('Correo electrónico') ?>
+            <?= $form->field($model, 'password')->passwordInput(['maxlength' => true])->label('Contraseña') ?>
         </div>
     </div>
 

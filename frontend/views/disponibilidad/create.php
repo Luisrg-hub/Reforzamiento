@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Disponibilidad $model */
 
-$this->title = 'Create Disponibilidad';
+$this->title = 'Configure su horario';
 $this->params['breadcrumbs'][] = ['label' => 'Disponibilidads', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

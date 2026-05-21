@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Sesion $model */
 
-$this->title = 'Update Sesion: ' . $model->id;
+$this->title = 'Modificar datos de la sesión ';
 $this->params['breadcrumbs'][] = ['label' => 'Sesions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

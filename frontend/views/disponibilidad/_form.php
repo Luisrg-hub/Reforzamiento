@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="form-group mt-3">
-        <?= Html::submitButton('Guardar Disponibilidad', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar Horario', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

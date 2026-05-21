@@ -41,7 +41,7 @@ class UserSearch extends User
      */
     public function search($params, $formName = null)
     {
-        $query = User::find();
+        $query = User::find()->innerJoin('perfil_admin', 'user.id = perfil_admin.id_usuario');
 
         // add conditions that should always apply here
 

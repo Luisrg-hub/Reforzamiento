@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var common\models\Disponibilidad $model */
 
-$this->title = 'Update Disponibilidad: ' . $model->id;
+$this->title = 'Actualizar horario';
 $this->params['breadcrumbs'][] = ['label' => 'Disponibilidads', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';

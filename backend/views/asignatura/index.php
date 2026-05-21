@@ -29,9 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'nombre',
-            
+            [
+            'label' => 'Carrera',
+            'attribute' => 'id_carrera',
+            'value' => 'carrera.nombre', // Usa la relación getCarrera() y extrae el campo 'nombre'
+        ],
             
             // --- CAMBIO EN LA COLUMNA ESTADO ---
             [

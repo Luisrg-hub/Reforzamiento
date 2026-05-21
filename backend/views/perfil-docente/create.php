@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /** @var common\models\PerfilDocente $model */
 
 
-$this->title = 'Crear usuario docente';
+$this->title = 'Nuevo Docente';
 $this->params['breadcrumbs'][] = ['label' => 'Perfil Docentes', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

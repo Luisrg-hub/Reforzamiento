@@ -49,7 +49,7 @@ AppAsset::register($this);
     [
         'label' => 'Usuarios',
         'items' => [
-            ['label' => 'General', 'url' => ['/user/index']], // Gestión de cuentas de usuario
+            ['label' => 'Administradores', 'url' => ['/user/index']], // Gestión de cuentas de usuario
             ['label' => 'Docentes', 'url' => ['/perfil-docente/index']],
             ['label' => 'Alumnos', 'url' => ['/perfil-alumno/index']],
         ],

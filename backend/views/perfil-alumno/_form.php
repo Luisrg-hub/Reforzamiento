@@ -14,9 +14,9 @@ use common\models\Carrera;
             Datos de cuenta de usuario
         </div>
         <div class="card-body" style="padding: 20px;">
-            <?= $form->field($modelUser, 'username')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($modelUser, 'email')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($modelUser, 'password')->passwordInput(['maxlength' => true]) ?>
+            <?= $form->field($modelUser, 'username')->textInput(['maxlength' => true])->label('Nombre de usuario') ?>
+            <?= $form->field($modelUser, 'email')->textInput(['maxlength' => true])->label('Correo electrónico') ?>
+            <?= $form->field($modelUser, 'password')->passwordInput(['maxlength' => true])->label('Contraseña') ?>
         </div>
     </div>
 
@@ -26,9 +26,9 @@ use common\models\Carrera;
         </div>
         <div class="card-body" style="padding: 20px;">
             <?= $form->field($model, 'matricula')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'apellido_paterno')->textInput(['maxlength' => true]) ?>
-            <?= $form->field($model, 'apellido_materno')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'nombre')->textInput(['maxlength' => true, 'readonly' => !$model->isNewRecord]) ?>
+            <?= $form->field($model, 'apellido_paterno')->textInput(['maxlength' => true, 'readonly' => !$model->isNewRecord]) ?>
+            <?= $form->field($model, 'apellido_materno')->textInput(['maxlength' => true, 'readonly' => !$model->isNewRecord]) ?>
             <?php 
             // 1. Obtener los datos de la tabla 'carrera' y armar la lista
             // IMPORTANTE: Cambia 'id' y 'nombre' por los nombres exactos de tus columnas en la tabla carrera
@@ -38,7 +38,7 @@ use common\models\Carrera;
             <?= $form->field($model, 'id_carrera')->dropDownList(
                 $listaCarreras, 
                 ['prompt' => '-- Seleccione una carrera --']
-            ) ?>
+            )->label('Ingeniería') ?>
             </div>
     </div>
 

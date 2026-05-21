@@ -29,7 +29,7 @@ $dataDisponibilidad = ArrayHelper::map($misBloques, 'hora_inicio', function($mod
 
     <?= $form->field($model, 'id_asignacion')->dropDownList($dataAsignaciones, [
         'prompt' => 'Seleccione la materia...'
-    ]) ?>
+    ])->label('Asignatura designada') ?>
 
     <div class="row">
         <div class="col-md-6">
