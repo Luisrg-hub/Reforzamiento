@@ -25,6 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
         <?= Html::a('Ver Lista de Inscritos', ['lista-inscritos', 'id' => $model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<span class="glyphicon glyphicon-file"></span> Descargar Reporte PDF', 
+            ['reporte-pdf', 'id' => $model->id], 
+            [
+                'class' => 'btn btn-danger', // Color rojo característico de los PDFs
+                'target' => '_blank', // Abre en pestaña nueva si se prefiere visualizar antes
+                'data-pjax' => '0',   // Crucial: Desactiva PJAX para que la descarga funcione
+            ]
+        ) ?>
     </p>
 
     <?= DetailView::widget([

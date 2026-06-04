@@ -44,5 +44,10 @@ class AlumnoSesion extends \yii\db\ActiveRecord
             'id_alumno' => 'Id Alumno',
         ];
     }
+    public function getPerfilAlumno()
+    {
+        // Cada registro intermedio pertenece a un PerfilAlumno uniendo id_usuario con id_alumno
+        return $this->hasOne(PerfilAlumno::class, ['id_usuario' => 'id_alumno']);
+    }
 
 }

@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use Yii;
 use common\models\User;
 use backend\models\UserSearch;
 use yii\web\Controller;
@@ -155,9 +156,23 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+       // 1. PROTECCIÓN RAÍZ: No permitir borrar al administrador principal (ID 1)
+    if ($id == 1) {
+        Yii::$app->session->setFlash('error', 'El administrador principal (Root) está blindado y no puede ser eliminado.');
         return $this->redirect(['index']);
+    }
+
+    // 2. AUTO-ELIMINACIÓN: No permitir que el admin se borre a sí mismo
+    if ($id == Yii::$app->user->id) {
+        Yii::$app->session->setFlash('error', 'Operación inválida: No puedes eliminar tu propia cuenta mientras estás en sesión.');
+        return $this->redirect(['index']);
+    }
+
+    // Si pasa los dos candados, entonces procedemos a borrar
+    $this->findModel($id)->delete();
+
+    Yii::$app->session->setFlash('success', 'El administrador ha sido eliminado correctamente.');
+    return $this->redirect(['index']);
     }
 
     /**

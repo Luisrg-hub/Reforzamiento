@@ -61,9 +61,17 @@ class Sesion extends \yii\db\ActiveRecord
     /**
      * Relación con la tabla Asignacion
      */
+    
     public function getAsignacion()
     {
+        // La sesión se conecta a la asignación a través de id_asignacion
         return $this->hasOne(Asignacion::class, ['id' => 'id_asignacion']);
     }
+
+    public function getAlumnoSesiones()
+    {
+        // Relación con la tabla intermedia que une alumnos con la asignatura o sesión
+        return $this->hasMany(AlumnoSesion::class, ['id_sesion' => 'id']);
+}
 
 }

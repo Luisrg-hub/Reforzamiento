@@ -47,5 +47,27 @@ return [
         ],
         */
     ],
-    'params' => $params,
-];
+        'as access' => [
+            'class' => 'yii\filters\AccessControl',
+            'except' => ['site/login', 'site/error'], // Rutas públicas permitidas
+            'rules' => [
+                [
+                    'allow' => true,
+                    'roles' => ['@'], // Exigir que esté logueado
+                    'matchCallback' => function ($rule, $action) {
+                        // Verificación en tiempo real si el usuario actual es administrador
+                        return (new \yii\db\Query())
+                            ->from('perfil_admin')
+                            ->where(['id_usuario' => Yii::$app->user->id])
+                            ->exists();
+                    },
+                ],
+            ],
+            'denyCallback' => function ($rule, $action) {
+                // Si un intruso intenta forzar la URL, lo deslogueamos y lo mandamos al login
+                Yii::$app->user->logout();
+                return Yii::$app->response->redirect(['site/login']);
+            },
+        ],
+        'params' => $params,
+    ];

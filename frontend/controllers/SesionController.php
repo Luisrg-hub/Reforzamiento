@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\ForbiddenHttpException;
+use kartik\mpdf\Pdf;
 
 /**
  * SesionController implements the CRUD actions for Sesion model.
@@ -262,6 +263,54 @@ class SesionController extends Controller
             'sesion' => $sesion,
             'alumnos' => $alumnos,
         ]);
+    }
+
+    public function actionReportePdf($id)
+    {
+        // 1. Buscar la sesión con todas sus relaciones para optimizar la consulta
+        $model = Sesion::find()
+            ->where(['id' => $id])
+            ->with(['asignacion.perfilDocente', 'asignacion.asignatura', 'alumnoSesiones.perfilAlumno'])
+            ->one();
+
+        if ($model === null) {
+            throw new NotFoundHttpException('La sesión solicitada no existe.');
+        }
+
+        // 2. Renderizar una vista parcial de Yii de forma oculta (solo el HTML)
+        $content = $this->renderPartial('_reporte_pdf', [
+            'model' => $model,
+        ]);
+
+        // 3. Configurar el componente PDF de Kartik
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_UTF8, // Soporte para acentos y eñes
+            'format' => Pdf::FORMAT_A4, // Tamaño del papel
+            'orientation' => Pdf::ORIENT_PORTRAIT, // Orientación vertical
+            'destination' => Pdf::DEST_BROWSER, // DEST_DOWNLOAD fuerza la descarga automática. Usa DEST_BROWSER si quieres que se abra primero en el navegador.
+            'filename' => 'Reporte_Sesion_' . $model->id . '_' . date('Ymd-His') . '.pdf',
+            'content' => $content,  
+            'cssInline' => '
+                body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; color: #333; }
+                .header-table { width: 100%; border-bottom: 2px solid #2c3e50; padding-bottom: 10px; margin-bottom: 20px; }
+                .title { font-size: 22px; color: #2c3e50; font-weight: bold; }
+                .info-table { width: 100%; margin-bottom: 30px; font-size: 12px; }
+                .info-table td { padding: 5px; }
+                .info-label { font-weight: bold; color: #555; width: 150px; }
+                .students-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+                .students-table th { background-color: #34495e; color: white; padding: 8px; text-align: left; font-size: 13px; }
+                .students-table td { padding: 8px; border-bottom: 1px solid #ddd; font-size: 12px; }
+                .students-table tr:nth-child(even) { background-color: #f9f9f9; }
+                .footer { text-align: center; font-size: 10px; color: #7f8c8d; border-top: 1px solid #eee; padding-top: 10px; margin-top: 50px; }
+            ',
+            'methods' => [ 
+                'SetHeader' => ['Reporte Oficial de Sesión Académica'],
+                'SetFooter' => ['Generado el: {DATE j-m-Y H:i} || Página {PAGENO} de {nb}'],
+            ]
+        ]);
+
+        // 4. Retornar el archivo PDF generado
+        return $pdf->render();
     }
 
 }

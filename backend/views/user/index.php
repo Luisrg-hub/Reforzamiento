@@ -43,10 +43,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, User $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                },
+                // --- INICIO DEL CAMBIO ---
+                'visibleButtons' => [
+                    'delete' => function ($model, $key, $index) {
+                        // El botón 'delete' será visible SOLO SI:
+                        // El ID no es 1 (Administrador Root) Y el ID no es el del usuario activo en sesión
+                        return $model->id != 1 && $model->id != Yii::$app->user->id;
+                    }
+                ]
+                // --- FIN DEL CAMBIO ---
             ],
         ],
     ]); ?>
-
 
 </div>
