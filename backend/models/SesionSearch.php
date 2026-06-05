@@ -61,11 +61,12 @@ class SesionSearch extends Sesion
         $query->andFilterWhere([
             'id' => $this->id,
             'id_asignacion' => $this->id_asignacion,
-            'fecha' => $this->fecha,
-            'hora_inicio' => $this->hora_inicio,
             'duracion' => $this->duracion,
             'estado' => $this->estado,
         ]);
+       
+        $query->andFilterWhere(['like', 'fecha', $this->fecha])
+            ->andFilterWhere(['like', 'hora_inicio', $this->hora_inicio]);
 
         $query->andFilterWhere(['like', 'tema', $this->tema]);
 

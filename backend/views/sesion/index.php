@@ -40,9 +40,28 @@ $this->params['breadcrumbs'][] = $this->title;
                 return $model->asignacion->asignatura->nombre;
             }
         ],
-        'fecha:date',
-        'hora_inicio:time',
-
+        [
+        'attribute' => 'fecha',
+        // Cambiamos el cuadro de texto simple por un selector de fecha nativo de HTML5
+        'filter' => \yii\helpers\Html::activeInput('date', $searchModel, 'fecha', [
+            'class' => 'form-control'
+        ]),
+        'value' => function($model) {
+            // Esto mantiene tu formato visual bonito en la tabla
+            return Yii::$app->formatter->asDate($model->fecha, 'medium'); 
+        }
+        ],
+        [
+        'attribute' => 'hora_inicio',
+        // Cambiamos el cuadro de texto por un selector de hora nativo de HTML5
+        'filter' => \yii\helpers\Html::activeInput('time', $searchModel, 'hora_inicio', [
+            'class' => 'form-control'
+        ]),
+        'value' => function($model) {
+            // Mantiene el formato visual bonito de 12 horas (ej. 2:00 PM) en la tabla
+            return Yii::$app->formatter->asTime($model->hora_inicio, 'short'); 
+        }
+        ],
         [
             'class' => 'yii\grid\ActionColumn',
             // El admin conserva los botones de Ver, Editar y Borrar

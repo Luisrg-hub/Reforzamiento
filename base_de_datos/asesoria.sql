@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 04-06-2026 a las 14:49:58
+-- Tiempo de generación: 05-06-2026 a las 06:39:07
 -- Versión del servidor: 9.1.0
 -- Versión de PHP: 8.3.14
 
@@ -35,6 +35,13 @@ CREATE TABLE IF NOT EXISTS `alumno_sesion` (
   KEY `fk-as-alumno` (`id_alumno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `alumno_sesion`
+--
+
+INSERT INTO `alumno_sesion` (`id_sesion`, `id_alumno`) VALUES
+(13, 31);
+
 -- --------------------------------------------------------
 
 --
@@ -46,11 +53,18 @@ CREATE TABLE IF NOT EXISTS `asignacion` (
   `id` int NOT NULL AUTO_INCREMENT,
   `id_docente` int NOT NULL,
   `id_asignatura` int NOT NULL,
-  `periodo` varchar(50) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `periodo` varchar(100) COLLATE utf8mb3_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk-asig-docente` (`id_docente`),
   KEY `fk-asig-asignatura` (`id_asignatura`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `asignacion`
+--
+
+INSERT INTO `asignacion` (`id`, `id_docente`, `id_asignatura`, `periodo`) VALUES
+(19, 30, 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -66,7 +80,14 @@ CREATE TABLE IF NOT EXISTS `asignatura` (
   `estado` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `fk_asignatura_carrera` (`id_carrera`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `asignatura`
+--
+
+INSERT INTO `asignatura` (`id`, `nombre`, `id_carrera`, `estado`) VALUES
+(8, 'Álgebra lineal', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +143,15 @@ CREATE TABLE IF NOT EXISTS `disponibilidad` (
   `hora_cierre` time NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk-disp-docente` (`id_docente`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `disponibilidad`
+--
+
+INSERT INTO `disponibilidad` (`id`, `id_docente`, `dia`, `hora_inicio`, `hora_cierre`) VALUES
+(5, 30, 'Lunes', '14:00:00', '15:00:00'),
+(6, 30, 'Martes', '17:15:00', '18:15:00');
 
 -- --------------------------------------------------------
 
@@ -214,6 +243,13 @@ CREATE TABLE IF NOT EXISTS `perfil_alumno` (
   KEY `fk-alumno-carrera` (`id_carrera`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `perfil_alumno`
+--
+
+INSERT INTO `perfil_alumno` (`id_usuario`, `matricula`, `nombre`, `apellido_paterno`, `apellido_materno`, `id_carrera`) VALUES
+(31, '23070030', 'Agustin', 'Coalt', 'Perez', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -230,6 +266,13 @@ CREATE TABLE IF NOT EXISTS `perfil_docente` (
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `perfil_docente`
+--
+
+INSERT INTO `perfil_docente` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `telefono`) VALUES
+(30, 'Luis', 'Rosado', 'Góngora', '9851084003');
+
 -- --------------------------------------------------------
 
 --
@@ -242,12 +285,19 @@ CREATE TABLE IF NOT EXISTS `sesion` (
   `id_asignacion` int NOT NULL,
   `fecha` date NOT NULL,
   `hora_inicio` time NOT NULL,
-  `duracion` int NOT NULL,
+  `duracion` int DEFAULT NULL,
   `tema` varchar(255) COLLATE utf8mb3_unicode_ci NOT NULL,
   `estado` int DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `fk-sesion-asignacion` (`id_asignacion`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `sesion`
+--
+
+INSERT INTO `sesion` (`id`, `id_asignacion`, `fecha`, `hora_inicio`, `duracion`, `tema`, `estado`) VALUES
+(13, 19, '2026-06-07', '14:00:00', NULL, 'Matrices', 1);
 
 -- --------------------------------------------------------
 
@@ -271,14 +321,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(1, 'master_root', '6BS7a3NEVFYZ_tES0lqE-W4-hydlexEA', '$2y$13$E7fsb1zcNudGF.SgksrNYuT5GJ8WyTCXwDdv6zldaKK2NBCNuOrP.', NULL, 'root@sistema.com', 10, 1780257287, 1780257287, NULL);
+(1, 'master_root', '6BS7a3NEVFYZ_tES0lqE-W4-hydlexEA', '$2y$13$E7fsb1zcNudGF.SgksrNYuT5GJ8WyTCXwDdv6zldaKK2NBCNuOrP.', NULL, 'root@sistema.com', 10, 1780257287, 1780257287, NULL),
+(30, 'luis.rosado', 'vIdBWr-D-K6S9jRS1j4NMq8L4eS_idO3', '$2y$13$MDS7fsu85FNbzgsh7eh9Ve8WAzfzZYtuctk.9PUnYnrC0QfuagCNe', NULL, 'luisrosadogongora@outlook.com', 10, 1780611315, 1780611315, NULL),
+(31, 'Agustin', 'Ss2Rkho7kLfP9i0B9gKo0iYvFcI3KOmu', '$2y$13$UYS2QV7825o7vxrKLTN1L.1rZyj1YFvkNYQii4i.6.9fTvNazDsWG', NULL, 'agus@outlook.com', 10, 1780611795, 1780611795, NULL);
 
 --
 -- Restricciones para tablas volcadas

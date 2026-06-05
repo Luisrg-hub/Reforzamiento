@@ -29,8 +29,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'dia',
-            'hora_inicio',
-            'hora_cierre',
+        [
+        'attribute' => 'hora_inicio',
+        // Cambiamos el cuadro de texto por un selector de hora nativo de HTML5
+        'filter' => \yii\helpers\Html::activeInput('time', $searchModel, 'hora_inicio', [
+            'class' => 'form-control'
+        ]),
+        'value' => function($model) {
+            // Mantiene el formato visual bonito de 12 horas (ej. 2:00 PM) en la tabla
+            return Yii::$app->formatter->asTime($model->hora_inicio, 'short'); 
+        }
+        ],
+        [
+        'attribute' => 'hora_cierre',
+        // Cambiamos el cuadro de texto por un selector de hora nativo de HTML5
+        'filter' => \yii\helpers\Html::activeInput('time', $searchModel, 'hora_cierre', [
+            'class' => 'form-control'
+        ]),
+        'value' => function($model) {
+            // Mantiene el formato visual bonito de 12 horas (ej. 2:00 PM) en la tabla
+            return Yii::$app->formatter->asTime($model->hora_cierre, 'short'); 
+        }
+        ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Disponibilidad $model, $key, $index, $column) {
